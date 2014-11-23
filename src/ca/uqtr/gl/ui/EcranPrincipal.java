@@ -19,8 +19,8 @@ import ca.uqtr.gl.controllers.ControlleurVentes;
 public class EcranPrincipal {
 
 	
-	public static ControlleurClients ctlClients = new ControlleurClients();
-	public static ControlleurArticles ctlArticles = new ControlleurArticles();
+	public static ControlleurClients ctlClients;
+	public static ControlleurArticles ctlArticles;
 	public static ControlleurVentes ctlVentes = new ControlleurVentes();
 	
 	private JPanel contentPane;
@@ -110,7 +110,7 @@ public class EcranPrincipal {
 		btnGererArticles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				EcranListeArticle window = new EcranListeArticle(ControlleurArticles.getInstance());
+				EcranListeArticle window = new EcranListeArticle(ctlArticles);
 				window.frame.setVisible(true);
 			}
 		});
