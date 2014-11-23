@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 
 import ca.uqtr.gl.controllers.ControlleurArticles;
 import ca.uqtr.gl.entities.Article;
+import ca.uqtr.gl.entities.Article.TypeProvenance;
 import ca.uqtr.gl.util.Utils;
 
 public class EcranGestionArticle {
@@ -59,7 +60,7 @@ public class EcranGestionArticle {
 			txtHauteur.setText(Double.toString(a.getHauteur()));
 			txtLongeur.setText(Double.toString(a.getLongeur()));
 			txtFraisDouane.setText(Double.toString(a.getFraisDouane()));
-			txtProvenance.setText(a.getProvenance());
+			txtProvenance.setText(a.getProvenance().toString());
 		
 		}
 		
@@ -230,10 +231,9 @@ public class EcranGestionArticle {
 						double prix = Double.parseDouble(txtPrix.getText());
 						double qte = Double.parseDouble(txtQte.getText());
 						double fraisDouane = Double.parseDouble(txtFraisDouane.getText());
-						String provenance = txtProvenance.getText();
+						TypeProvenance provenance = TypeProvenance.valueOf(txtProvenance.getText());
 					
-
-					 
+	
 						if (article == null) {
 							ctlArticles.ajouter(code, description, lougueur, largeur, hauteur, prix, qte, fraisDouane, provenance);
 							article = ctlArticles.obtenirDernierArticle();
@@ -245,7 +245,6 @@ public class EcranGestionArticle {
 				}
 					
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -367,10 +366,14 @@ public class EcranGestionArticle {
 			setChampsErreur(txtPrix, "Veuillez entrer un prix.");
 		}
 		
-		if (!Utils.isNumeric(txtPrix.getText())) {
-			setChampsErreur(txtPrix, "Veuillez des frais de douanes.");
+		if (!Utils.isNumeric(txtFraisDouane.getText())) {
+			setChampsErreur(txtFraisDouane, "Veuillez des frais de douanes.");
 		}
 		
+
+		if (!(txtProvenance.getText().equals("Can") || txtProvenance.getText().equals("Us"))) {
+			setChampsErreur(txtProvenance, "Veuillez entrer une Provenance  (Can, Us)");
+		}
 		
 		return !txtCode.isInError() &&
 			   !txtDescription.isInError() &&
@@ -379,6 +382,7 @@ public class EcranGestionArticle {
 			   !txtPrix.isInError() &&
 			   !txtHauteur.isInError() &&
 			   !txtFraisDouane.isInError() &&
+			   !txtProvenance.isInError() &&
 			   !txtLongeur.isInError();
 	}
 	

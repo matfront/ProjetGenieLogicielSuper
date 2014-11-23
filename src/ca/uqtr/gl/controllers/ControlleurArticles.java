@@ -4,6 +4,7 @@ package ca.uqtr.gl.controllers;
 import ca.uqtr.gl.domain.RegistreArticle;
 import ca.uqtr.gl.domain.RegistreClient;
 import ca.uqtr.gl.entities.Article;
+import ca.uqtr.gl.entities.Article.TypeProvenance;
 
 public class ControlleurArticles {
 	
@@ -35,7 +36,7 @@ public class ControlleurArticles {
 	}
 	
 	public void ajouter(String code, String description, 
-			double longeur, double largeur, double hauteur, double prix, double qte, double fraisDouane, String provenance) throws Exception {
+			double longeur, double largeur, double hauteur, double prix, double qte, double fraisDouane, TypeProvenance provenance) throws Exception {
 		registreArticle.ajouterArticle(code, description, longeur, largeur, hauteur, prix, qte, fraisDouane, provenance);
 	}
 
@@ -44,7 +45,7 @@ public class ControlleurArticles {
 	}
 
 	public void modifier(Article a, String code, String description, 
-			double longeur, double largeur, double hauteur, double prix, double qte, double fraisDouane, String provenance) {
+			double longeur, double largeur, double hauteur, double prix, double qte, double fraisDouane, TypeProvenance provenance) {
 		registreArticle.modifierArticle(a, code, description, longeur, largeur, hauteur, prix, qte, fraisDouane, provenance);
 	}
 	

@@ -3,6 +3,8 @@ package ca.uqtr.gl.domain;
 import java.util.ArrayList;
 
 import ca.uqtr.gl.entities.Article;
+import ca.uqtr.gl.entities.Article.TypeProvenance;
+import ca.uqtr.gl.entities.ArticleFactory;
 
 public class RegistreArticle {
 	private static ArrayList<Article> listeArticles;
@@ -33,13 +35,13 @@ public class RegistreArticle {
 	}
 
 	public void ajouterArticle(String code, String description, 
-			double longeur, double largeur, double hauteur, double prix, double qte, double fraisDouane, String provenance) throws Exception {
+			double longeur, double largeur, double hauteur, double prix, double qte, double fraisDouane, TypeProvenance provenance) throws Exception {
 
 		if(obtenirArticle(code) != null)
 		{
 			throw new Exception("code déjà existant");		
 		}
-		listeArticles.add(new Article(code, description, longeur, largeur, hauteur, prix, qte, fraisDouane, provenance));
+		listeArticles.add(ArticleFactory.buildArticle(code, description, longeur, largeur, hauteur, prix, qte, fraisDouane, provenance));
 	}
 
 	public void supprimerArticle(Article article) {
@@ -47,7 +49,7 @@ public class RegistreArticle {
 	}
 
 	public void modifierArticle(Article a, String code, String description, 
-			double longeur, double largeur, double hauteur, double prix, double qte, double fraisDouane, String provenance) {
+			double longeur, double largeur, double hauteur, double prix, double qte, double fraisDouane, TypeProvenance provenance) {
 		
 		a.setCode(code);
 		a.setDescription(description);

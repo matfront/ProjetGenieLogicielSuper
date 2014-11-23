@@ -11,15 +11,12 @@ public class Article implements java.io.Serializable {
 	private double prix;
 	private double qteInventaire;
 	private double fraisDouane;
-	private String provenance;
+	private TypeProvenance provenance;
 	
-	
-	/*
-	public Article(String nom, String prenom, Date dateNaissance, Adresse adresse) {
-		this(RegistreClient.compteurIdentifiant, "", nom, prenom, dateNaissance, adresse, "", "");
-	}
-	*/
-	public Article(String code, String description, double longeur, double largeur, double hauteur, double prix, double qte, double fraisDouane, String provenance) {
+	public static enum TypeProvenance {
+	    Can, Us 
+	} 
+	public Article(String code, String description, double longeur, double largeur, double hauteur, double prix, double qte, TypeProvenance provenance) {
 	
 		this.code = code;
 		this.description = description;
@@ -28,7 +25,7 @@ public class Article implements java.io.Serializable {
 		this.hauteur = hauteur;
 		this.prix = prix;
 		this.qteInventaire = qte;
-		this.fraisDouane  = fraisDouane;
+
 		this.provenance = provenance;
 	}
 	
@@ -96,11 +93,11 @@ public class Article implements java.io.Serializable {
 		this.fraisDouane = fraisDouane;
 	}
 	
-	public String getProvenance() {
+	public TypeProvenance getProvenance() {
 		return provenance;
 	}
 
-	public void setProvenance(String Provenance) {
+	public void setProvenance(TypeProvenance Provenance) {
 		this.provenance = Provenance;
 	}
 
