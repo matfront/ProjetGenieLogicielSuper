@@ -2,14 +2,26 @@ package ca.uqtr.gl.controllers;
 
 
 import ca.uqtr.gl.domain.RegistreArticle;
+import ca.uqtr.gl.domain.RegistreClient;
 import ca.uqtr.gl.entities.Article;
 
 public class ControlleurArticles {
 	
 	private static RegistreArticle registreArticle;
+	private static ControlleurArticles instance;
+
 
 	public ControlleurArticles() {
-		registreArticle = new RegistreArticle();
+		registreArticle =  RegistreArticle.getInstance();
+		
+	}
+	
+	public static synchronized ControlleurArticles getInstance() {
+		if (instance == null) {
+			instance = new ControlleurArticles();
+		}
+		
+		return instance;
 	}
 	
 	public Article obtenirArticle(String code) {

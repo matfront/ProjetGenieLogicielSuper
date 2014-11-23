@@ -6,6 +6,7 @@ import ca.uqtr.gl.entities.Article;
 
 public class RegistreArticle {
 	private static ArrayList<Article> listeArticles;
+	private static RegistreArticle instance;
 	
 		
 	public RegistreArticle() {
@@ -13,6 +14,15 @@ public class RegistreArticle {
 			listeArticles = new ArrayList<Article>();
 		}
 	}
+	
+	public static synchronized RegistreArticle getInstance() {
+		if (instance == null) {
+			instance = new RegistreArticle();
+		}
+		
+		return instance;
+	}
+	
 
 	public ArrayList<Article> getListeArticles() {
 		return listeArticles;

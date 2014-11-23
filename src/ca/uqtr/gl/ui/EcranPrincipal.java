@@ -18,10 +18,10 @@ import ca.uqtr.gl.controllers.ControlleurVentes;
 
 public class EcranPrincipal {
 
-	//Mauvaise programmation, sera remplac� par un singleton dans l'autre projet.
-	public final static ControlleurClients ctlClients = new ControlleurClients();
-	public final static ControlleurArticles ctlArticles = new ControlleurArticles();
-	public final static ControlleurVentes ctlVentes = new ControlleurVentes();
+	
+	public static ControlleurClients ctlClients = new ControlleurClients();
+	public static ControlleurArticles ctlArticles = new ControlleurArticles();
+	public static ControlleurVentes ctlVentes = new ControlleurVentes();
 	
 	private JPanel contentPane;
 	private JFrame frame;
@@ -58,6 +58,9 @@ public class EcranPrincipal {
 		
 		System.out.println(ctlClients.obtenirClient(1).getNoCarteMembre());
 		System.out.println(ctlClients.obtenirClient(2).getNoCarteMembre());*/
+		
+		//un singleton du ControlleurArticles
+		ctlArticles  = ControlleurArticles.getInstance();
 				
 		frame = new JFrame();
 		frame.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
@@ -107,10 +110,12 @@ public class EcranPrincipal {
 		btnGererArticles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				EcranListeArticle window = new EcranListeArticle(ctlArticles);
+				EcranListeArticle window = new EcranListeArticle(ControlleurArticles.getInstance());
 				window.frame.setVisible(true);
 			}
 		});
+		
+		
 		
 	}
 	
