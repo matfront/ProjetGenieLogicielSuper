@@ -2,7 +2,6 @@ package ca.uqtr.gl.domain;
 
 import java.util.ArrayList;
 
-import ca.uqtr.gl.entities.Article;
 import ca.uqtr.gl.entities.Vente;
 
 public class RegistreVente {

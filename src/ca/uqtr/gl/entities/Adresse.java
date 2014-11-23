@@ -1,6 +1,8 @@
 package ca.uqtr.gl.entities;
 
 public class Adresse implements java.io.Serializable {
+	private static final long serialVersionUID = 6614711063015929540L;
+	
 	private int noCivique;
 	private String odonyme;
 	private String ville;

@@ -1,6 +1,8 @@
 package ca.uqtr.gl.entities;
 
 public class Article implements java.io.Serializable {
+	private static final long serialVersionUID = -1823180797602334888L;
+	
 	private String code;
 	private String description;
 	private double longeur;

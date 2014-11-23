@@ -1,6 +1,8 @@
 package ca.uqtr.gl.ui;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
@@ -12,18 +14,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-
-
-
 import ca.uqtr.gl.controllers.ControlleurArticles;
-import ca.uqtr.gl.controllers.ControlleurClients;
 import ca.uqtr.gl.entities.Article;
-import ca.uqtr.gl.entities.Client;
 import ca.uqtr.gl.util.Utils;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.text.SimpleDateFormat;
 
 public class EcranGestionArticle {
 

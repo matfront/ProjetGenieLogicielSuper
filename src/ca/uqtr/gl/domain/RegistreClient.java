@@ -5,19 +5,27 @@ import java.util.Date;
 
 import ca.uqtr.gl.entities.Adresse;
 import ca.uqtr.gl.entities.Client;
-import ca.uqtr.gl.util.Utils;
 
 public class RegistreClient {
+	private static RegistreClient instance;
 	private static ArrayList<Client> listeClients;
 	
 	// identifiant unique pour nouveau client
 	public static int compteurIdentifiant = 0;
 	public static int compteurCarteMembre = 1000;
 		
-	public RegistreClient() {
+	private RegistreClient() {
 		if (listeClients == null) {
 			listeClients = new ArrayList<Client>();
 		}
+	}
+	
+	public static synchronized RegistreClient getInstance() {
+		if (instance == null) {
+			instance = new RegistreClient();
+		}
+		
+		return instance;
 	}
 
 	public ArrayList<Client> getListeClients() {
