@@ -5,6 +5,8 @@ import java.util.Date;
 import ca.uqtr.gl.domain.RegistreClient;
 
 public class Client extends Personne implements java.io.Serializable {
+	private static final long serialVersionUID = 8275564016706287872L;
+	
 	private int identifiant;
 	private int noCarteMembre;
 	private String noTelephone;

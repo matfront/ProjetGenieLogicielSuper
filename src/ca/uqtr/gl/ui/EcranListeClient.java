@@ -18,6 +18,8 @@ import ca.uqtr.gl.ui.components.ListeClientTableDataModel;
 
 public class EcranListeClient extends JFrame {
 
+	private static final long serialVersionUID = 6881348700202343820L;
+	
 	private JPanel contentPane;
 	public JFrame frame;
 	private JTable table;
@@ -32,7 +34,7 @@ public class EcranListeClient extends JFrame {
 		
 		frame.setTitle("Liste des clients");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 475, 320);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		frame.setContentPane(contentPane);
@@ -55,7 +57,7 @@ public class EcranListeClient extends JFrame {
 		        int row = table.rowAtPoint(evt.getPoint());
 		        int col = table.columnAtPoint(evt.getPoint());
 		        if (row >= 0 && col >= 0) {
-		        	EcranGestionClient window = new EcranGestionClient(EcranPrincipal.ctlClients, dataModel.getClient(row));
+		        	EcranGestionClient window = new EcranGestionClient(dataModel.getClient(row));
 					window.frmGestionClient.setVisible(true);
 		        }
 		    }
@@ -71,7 +73,7 @@ public class EcranListeClient extends JFrame {
 		btnAjouter.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				EcranGestionClient window = new EcranGestionClient(EcranPrincipal.ctlClients);
+				EcranGestionClient window = new EcranGestionClient();
 				window.frmGestionClient.setVisible(true);
 				
 				window.frmGestionClient.addWindowListener(new WindowListener() {

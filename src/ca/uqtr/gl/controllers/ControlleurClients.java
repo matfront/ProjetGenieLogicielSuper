@@ -8,10 +8,19 @@ import ca.uqtr.gl.entities.Client;
 
 public class ControlleurClients {
 	
+	private static ControlleurClients instance;
 	private static RegistreClient registreClient;
 
-	public ControlleurClients() {
-		registreClient = new RegistreClient();
+	private ControlleurClients() {
+		registreClient = RegistreClient.getInstance();
+	}
+	
+	public static synchronized ControlleurClients getInstance() {
+		if (instance == null) {
+			instance = new ControlleurClients();
+		}
+		
+		return instance;
 	}
 	
 	public Client obtenirClient(int identifiant) {

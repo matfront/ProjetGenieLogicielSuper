@@ -19,7 +19,7 @@ import ca.uqtr.gl.controllers.ControlleurVentes;
 public class EcranPrincipal {
 
 	//Mauvaise programmation, sera remplac� par un singleton dans l'autre projet.
-	public final static ControlleurClients ctlClients = new ControlleurClients();
+	private ControlleurClients ctlClients = ControlleurClients.getInstance();
 	public final static ControlleurArticles ctlArticles = new ControlleurArticles();
 	public final static ControlleurVentes ctlVentes = new ControlleurVentes();
 	

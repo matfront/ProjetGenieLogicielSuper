@@ -40,16 +40,16 @@ public class EcranGestionClient {
 	private JTagTextField txtOdonyme;
 	private JTagTextField txtDateNaissance;
 
-	public EcranGestionClient(ControlleurClients controlleur) {
-		this(controlleur, null);
+	public EcranGestionClient() {
+		this(null);
 	}
 	
 	/**
 	 * @wbp.parser.constructor
 	 */
-	public EcranGestionClient(ControlleurClients controlleur, Client c) {
+	public EcranGestionClient(Client c) {
 		initialize();
-		this.ctlClients = controlleur;
+		this.ctlClients = ControlleurClients.getInstance();
 		this.client = c;
 		this.isDirty = (c == null);
 		

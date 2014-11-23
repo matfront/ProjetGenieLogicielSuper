@@ -2,7 +2,6 @@ package ca.uqtr.gl.controllers;
 
 import java.util.ArrayList;
 
-import ca.uqtr.gl.domain.RegistreArticle;
 import ca.uqtr.gl.domain.RegistreVente;
 import ca.uqtr.gl.entities.Vente;
 

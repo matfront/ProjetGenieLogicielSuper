@@ -1,20 +1,23 @@
 package ca.uqtr.gl.ui.components;
 
 import java.util.ArrayList;
+
 import javax.swing.table.AbstractTableModel;
+
+import ca.uqtr.gl.controllers.ControlleurClients;
 import ca.uqtr.gl.entities.Client;
-import ca.uqtr.gl.ui.EcranPrincipal;
 
 public class ListeClientTableDataModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = -2999506785141283840L;
+	
 	private String[] columnNames;
 	private ArrayList<Client> listeClient; 
 	
 	public ListeClientTableDataModel(String[] columnNames)
 	{
 		this.columnNames = columnNames;
-		listeClient = EcranPrincipal.ctlClients.getRegistreClient().getListeClients();
+		listeClient = ControlleurClients.getInstance().getRegistreClient().getListeClients();
 	}
 	
 	public void setList(ArrayList<Client> listeClient)

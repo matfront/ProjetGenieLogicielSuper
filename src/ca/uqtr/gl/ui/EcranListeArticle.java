@@ -1,7 +1,5 @@
 package ca.uqtr.gl.ui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -16,12 +14,12 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import ca.uqtr.gl.controllers.ControlleurArticles;
-import ca.uqtr.gl.controllers.ControlleurClients;
 import ca.uqtr.gl.ui.components.ListeArticleTableDataModel;
-import ca.uqtr.gl.ui.components.ListeClientTableDataModel;
 
 public class EcranListeArticle extends JFrame {
 
+	private static final long serialVersionUID = 898190352182873942L;
+	
 	private JPanel contentPane;
 	public JFrame frame;
 	private JTable table;
@@ -36,7 +34,7 @@ public class EcranListeArticle extends JFrame {
 		
 		frame.setTitle("Liste des articles");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 475, 320);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		frame.setContentPane(contentPane);
