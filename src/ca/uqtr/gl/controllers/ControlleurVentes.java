@@ -9,11 +9,23 @@ public class ControlleurVentes {
 
 	private static RegistreVente registreVentes;
 	private static int numeroFactureCompteur = 1000;
+	private static ControlleurVentes instance = null;
 	
-	public ControlleurVentes()
+	private  ControlleurVentes()
 	{
 		registreVentes = new RegistreVente();
 	}
+	
+	public static ControlleurVentes getInstance()
+	{
+		if(instance == null)
+		{
+			instance = new ControlleurVentes();
+		}
+		
+		return instance;
+	}
+	
 	public void ajouterVente(Vente vente)
 	{
 		vente.setNumeroFacture(numeroFactureCompteur++);

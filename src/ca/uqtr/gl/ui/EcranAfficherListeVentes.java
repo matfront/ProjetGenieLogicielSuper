@@ -87,7 +87,7 @@ public class EcranAfficherListeVentes {
 		
 		listModel.clear();
 		
-		for(Vente v : EcranPrincipal.ctlVentes.getListeVentes())
+		for(Vente v : ControlleurVentes.getInstance().getListeVentes())
 			listModel.addElement(v);
 	
 	}

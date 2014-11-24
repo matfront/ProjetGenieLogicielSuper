@@ -75,7 +75,7 @@ public class EcranTraiterUneVente {
 		String[] columnNames = {"Code",
 								"Description",
 								"Prix un.",
-				                "Qt�",
+				                "Qte",
 				                "Sous total ($)"
 				                };
 		
@@ -205,7 +205,7 @@ public class EcranTraiterUneVente {
 		final EcranTraiterUneVente ecran = this;
 		
 		//Clique boutton Ajouter
-		btnAjouter.addActionListener(new ActionListener() {
+		btnAjouter.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent arg0) {
 			EcranAjouterUnArticle window = new EcranAjouterUnArticle(ecran);
 			window.getFrame().setVisible(true);
@@ -244,7 +244,7 @@ public class EcranTraiterUneVente {
 				else
 				{	
 					//Appeler la fenetre EcranTraiterPaiement
-					EcranTraiterPaiement ecranTraiterPaiement = new EcranTraiterPaiement(vente, client);
+					EcranTraiterPaiement ecranTraiterPaiement = new EcranTraiterPaiement(vente, client, ecranAfficherListeVentes);
 					ecranTraiterPaiement.getFrame().setVisible(true);
 					
 					frame.setVisible(false);
@@ -282,21 +282,29 @@ public class EcranTraiterUneVente {
 	
 	private void assignerClientParCode(String code)
 	{
-		if (Utils.isNumeric(code)) {
-			client = ControlleurClients.getInstance().obtenirClientParNoCarteMembre(Integer.parseInt(code));
-
-			//Si le client est trouv�
-			if(client != null)
-			{
-				lblClientTrouve.setVisible(true);
-				lblClientNonTrouve.setVisible(false);
+		try
+		{
+			if (Utils.isNumeric(code)) {
+				
+				client = ControlleurClients.getInstance().obtenirClientParNoCarteMembre(Integer.parseInt(code));
+	
+				//Si le client est trouv�
+				if(client != null)
+				{
+					lblClientTrouve.setVisible(true);
+					lblClientNonTrouve.setVisible(false);
+				}
+				else
+				{
+					client = null;
+					lblClientTrouve.setVisible(false);
+					lblClientNonTrouve.setVisible(true);
+				}
 			}
-			else
-			{
-				client = null;
-				lblClientTrouve.setVisible(false);
-				lblClientNonTrouve.setVisible(true);
-			}
+		}
+		catch(Exception e)
+		{
+			return;
 		}
 	}
 

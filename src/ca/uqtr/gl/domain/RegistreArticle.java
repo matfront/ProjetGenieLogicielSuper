@@ -11,7 +11,7 @@ public class RegistreArticle {
 	private static RegistreArticle instance;
 	
 		
-	public RegistreArticle() {
+	private RegistreArticle() {
 		if (listeArticles == null) {
 			listeArticles = new ArrayList<Article>();
 		}

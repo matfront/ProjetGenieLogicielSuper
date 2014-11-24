@@ -58,7 +58,7 @@ public class EcranListeArticle extends JFrame {
 		        int row = table.rowAtPoint(evt.getPoint());
 		        int col = table.columnAtPoint(evt.getPoint());
 		        if (row >= 0 && col >= 0) {
-		        	EcranGestionArticle window = new EcranGestionArticle(EcranPrincipal.ctlArticles, dataModel.getArticle(row));
+		        	EcranGestionArticle window = new EcranGestionArticle(ControlleurArticles.getInstance(), dataModel.getArticle(row));
 					window.frmGestionArticles.setVisible(true);
 		        }
 		    }
@@ -74,7 +74,7 @@ public class EcranListeArticle extends JFrame {
 		btnAjouter.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				EcranGestionArticle window = new EcranGestionArticle(EcranPrincipal.ctlArticles);
+				EcranGestionArticle window = new EcranGestionArticle(ControlleurArticles.getInstance());
 				window.frmGestionArticles.setVisible(true);
 				
 				window.frmGestionArticles.addWindowListener(new WindowListener() {

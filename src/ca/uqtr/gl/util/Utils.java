@@ -19,6 +19,9 @@ public class Utils {
 		} catch (NumberFormatException nfe) {
 			return false;
 		}
+		catch (Exception nfe) {
+			return false;
+		}
 		return true;
 	}
 	

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
+import ca.uqtr.gl.controllers.ControlleurArticles;
 import ca.uqtr.gl.entities.Article;
 import ca.uqtr.gl.ui.EcranPrincipal;
 
@@ -14,7 +15,7 @@ public class ListeArticleTableDataModel extends AbstractTableModel {
 	public ListeArticleTableDataModel(String[] columnNames)
 	{
 		this.columnNames = columnNames;
-		listeArticle = EcranPrincipal.ctlArticles.getRegistreArticle().getListeArticles();
+		listeArticle = ControlleurArticles.getInstance().getRegistreArticle().getListeArticles();
 	}
 	
 	public void setList(ArrayList<Article> listeArticle)

@@ -13,15 +13,17 @@ import javax.swing.border.EmptyBorder;
 import ca.uqtr.gl.controllers.ControlleurArticles;
 import ca.uqtr.gl.controllers.ControlleurClients;
 import ca.uqtr.gl.controllers.ControlleurVentes;
+import ca.uqtr.gl.entities.Article.TypeProvenance;
+import ca.uqtr.gl.entities.Vente;
 
 
 
 public class EcranPrincipal {
 
 	
-	public static ControlleurClients ctlClients;
-	public static ControlleurArticles ctlArticles;
-	public static ControlleurVentes ctlVentes = new ControlleurVentes();
+	//Ces variables globales ont disparues dans cette version grâce au singletons
+	//public static ControlleurClients ctlClients;
+	//public static ControlleurArticles ctlArticles = new ControlleurArticles();
 	
 	private JPanel contentPane;
 	private JFrame frame;
@@ -31,36 +33,29 @@ public class EcranPrincipal {
 	 * Create the frame.
 	 */
 	public EcranPrincipal() {
-		/*ctlClients.ajouter("Tremblay", "Carl", null, null, "(450) 222-3333", "carl@gmail.com");
-		ctlClients.ajouter("Roy", "Bob", null, null, "(450) 444-5555", "roy@gmail.com");*/
+		ControlleurClients.getInstance().ajouter("Tremblay", "Carl", null, null, "(450) 222-3333", "carl@gmail.com");
+		ControlleurClients.getInstance().ajouter("Roy", "Bob", null, null, "(450) 444-5555", "roy@gmail.com");
 		
-		/*try
+		try
 		{
-			ctlArticles.ajouter("SKI1213", "Ski alpin", 12, 12, 12, 340, 5);
-			ctlArticles.ajouter("RAQ3434", "Raquette de tennis", 12, 12, 12, 100, 4);
-			ctlArticles.ajouter("BAL1000", "Balle de baseball", 12, 12, 12, 4.99, 15);
+			ControlleurArticles.getInstance().ajouter("SKI1213", "Ski alpin", 12, 12, 12, 340, 5, 10, TypeProvenance.Can);
+			ControlleurArticles.getInstance().ajouter("RAQ3434", "Raquette de tennis", 12, 12, 12, 100, 4, 10, TypeProvenance.Can);
+			ControlleurArticles.getInstance().ajouter("BAL1000", "Balle de baseball", 12, 12, 12, 4.99, 15, 10, TypeProvenance.Can);
 			
 			Vente v1 = new Vente();
-			v1.setClient(ctlClients.obtenirClientParNoCarteMembre(1000));
-			v1.ajouterLigne(2, ctlArticles.obtenirArticle("SKI1213"));
-			ctlVentes.ajouterVente(v1);
+			v1.setClient(ControlleurClients.getInstance().obtenirClientParNoCarteMembre(1000));
+			v1.ajouterLigne(2, ControlleurArticles.getInstance().obtenirArticle("SKI1213"));
+			ControlleurVentes.getInstance().ajouterVente(v1);
 			
 			Vente v2 = new Vente();
-			v2.setClient(ctlClients.obtenirClientParNoCarteMembre(1001));
-			v2.ajouterLigne(3, ctlArticles.obtenirArticle("SKI1213"));
-			ctlVentes.ajouterVente(v2);
+			v2.setClient(ControlleurClients.getInstance().obtenirClientParNoCarteMembre(1001));
+			v2.ajouterLigne(3, ControlleurArticles.getInstance().obtenirArticle("SKI1213"));
+			ControlleurVentes.getInstance().ajouterVente(v2);
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-		
-		
-		System.out.println(ctlClients.obtenirClient(1).getNoCarteMembre());
-		System.out.println(ctlClients.obtenirClient(2).getNoCarteMembre());*/
-		
-		//un singleton du ControlleurArticles
-		ctlArticles  = ControlleurArticles.getInstance();
 				
 		frame = new JFrame();
 		frame.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
@@ -91,7 +86,7 @@ public class EcranPrincipal {
 		btnGererClients.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				EcranListeClient window = new EcranListeClient(ctlClients);
+				EcranListeClient window = new EcranListeClient(ControlleurClients.getInstance());
 				window.frame.setVisible(true);
 			}
 		});
@@ -110,7 +105,7 @@ public class EcranPrincipal {
 		btnGererArticles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				EcranListeArticle window = new EcranListeArticle(ctlArticles);
+				EcranListeArticle window = new EcranListeArticle(ControlleurArticles.getInstance());
 				window.frame.setVisible(true);
 			}
 		});

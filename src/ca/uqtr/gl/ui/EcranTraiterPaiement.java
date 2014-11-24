@@ -13,6 +13,7 @@ import javax.swing.JSeparator;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JButton;
 
+import ca.uqtr.gl.controllers.ControlleurVentes;
 import ca.uqtr.gl.entities.Article;
 import ca.uqtr.gl.entities.Client;
 import ca.uqtr.gl.entities.Vente;
@@ -37,6 +38,7 @@ public class EcranTraiterPaiement {
 	private JPanel contentPane;
 	
 	private EcranTraiterUneVente ecranTraiterUneVente;
+	private EcranAfficherListeVentes ecranAfficherListeVentes;
 	private JTextField textFieldTotal;
 	private JTextField textFieldMontantRecu;
 	private JTextField textFieldMonnaie;
@@ -48,10 +50,11 @@ public class EcranTraiterPaiement {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	
 
-	public EcranTraiterPaiement(Vente vente, Client client) {
+	public EcranTraiterPaiement(Vente vente, Client client, EcranAfficherListeVentes ecranAfficherListeVentes) {
 		
 		this.vente = vente;
 		this.client = client;
+		this.ecranAfficherListeVentes = ecranAfficherListeVentes;
 		
 		frmTraiterUnPaiement = new JFrame();
 		frmTraiterUnPaiement.setAlwaysOnTop(true);
@@ -80,7 +83,7 @@ public class EcranTraiterPaiement {
 		rdbtnCarte.setBounds(101, 34, 83, 23);
 		contentPane.add(rdbtnCarte);
 		
-		JRadioButton rdbtnChque = new JRadioButton("Chèque");
+		JRadioButton rdbtnChque = new JRadioButton("Chaque");
 		buttonGroup.add(rdbtnChque);
 		rdbtnChque.setBounds(191, 34, 88, 23);
 		contentPane.add(rdbtnChque);
@@ -96,7 +99,7 @@ public class EcranTraiterPaiement {
 		contentPane.add(textFieldTotal);
 		textFieldTotal.setColumns(10);
 		
-		JLabel lblMontantReu = new JLabel("Montant reçu :");
+		JLabel lblMontantReu = new JLabel("Montant re�u :");
 		lblMontantReu.setBounds(6, 116, 134, 16);
 		contentPane.add(lblMontantReu);
 		
@@ -132,7 +135,6 @@ public class EcranTraiterPaiement {
 		JButton btnEnregistrer = new JButton("Enregistrer");
 		btnEnregistrer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				enregistrer();
 				// Lorsque le bouton "Enregistrer" est clique
 				// Enregistrer le paiement
 				enregistrer();
@@ -209,8 +211,8 @@ public class EcranTraiterPaiement {
 			vente.setClient(client);
 
 			//Ajoute la vente au registre
-			EcranPrincipal.ctlVentes.ajouterVente(vente);
-			//ecranAfficherListeVentes.rafraichirListeVentes(); // TODO ? Rafraichir la liste des ventes...?
+			ControlleurVentes.getInstance().ajouterVente(vente);
+			ecranAfficherListeVentes.rafraichirListeVentes(); // TODO ? Rafraichir la liste des ventes...?
 			frmTraiterUnPaiement.setVisible(false);
 		}
 	}

@@ -13,6 +13,7 @@ import javax.swing.JSeparator;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JButton;
 
+import ca.uqtr.gl.controllers.ControlleurArticles;
 import ca.uqtr.gl.entities.Article;
 import ca.uqtr.gl.entities.Vente;
 import ca.uqtr.gl.ui.components.VenteTableDataModel;
@@ -143,7 +144,7 @@ public class EcranAjouterUnArticle {
 	private void afficherArticle(String code)
 	{
 		
-		articleSelectionne = EcranPrincipal.ctlArticles.getRegistreArticle().obtenirArticle(code);
+		articleSelectionne = ControlleurArticles.getInstance().getRegistreArticle().obtenirArticle(code);
 
 
 		//Si l'article est trouvé
