@@ -16,6 +16,11 @@ import javax.swing.JButton;
 import ca.uqtr.gl.controllers.ControlleurVentes;
 import ca.uqtr.gl.entities.Article;
 import ca.uqtr.gl.entities.Client;
+import ca.uqtr.gl.entities.Paiement;
+import ca.uqtr.gl.entities.PaiementConteneur;
+import ca.uqtr.gl.entities.PaiementParCarte;
+import ca.uqtr.gl.entities.PaiementParCheque;
+import ca.uqtr.gl.entities.PaiementParEspeces;
 import ca.uqtr.gl.entities.Vente;
 import ca.uqtr.gl.ui.components.VenteTableDataModel;
 
@@ -43,9 +48,9 @@ public class EcranTraiterPaiement {
 	private JTextField textFieldMontantRecu;
 	private JTextField textFieldMonnaie;
 	
-	JRadioButton rdbtnEspces;
+	JRadioButton rdbtnEspeces;
 	JRadioButton rdbtnCarte;
-	JRadioButton rdbtnChque;
+	JRadioButton rdbtnCheque;
 
 	
 	private boolean isPaiementReussi = false;
@@ -77,21 +82,21 @@ public class EcranTraiterPaiement {
 		lblModeDePaiement.setBounds(6, 6, 178, 16);
 		contentPane.add(lblModeDePaiement);
 		
-		rdbtnEspces = new JRadioButton("Especes");
-		rdbtnEspces.setSelected(true);
-		buttonGroup.add(rdbtnEspces);
-		rdbtnEspces.setBounds(6, 34, 91, 23);
-		contentPane.add(rdbtnEspces);
+		rdbtnEspeces = new JRadioButton("Especes");
+		rdbtnEspeces.setSelected(true);
+		buttonGroup.add(rdbtnEspeces);
+		rdbtnEspeces.setBounds(6, 34, 91, 23);
+		contentPane.add(rdbtnEspeces);
 		
 		rdbtnCarte = new JRadioButton("Carte");
 		buttonGroup.add(rdbtnCarte);
 		rdbtnCarte.setBounds(101, 34, 83, 23);
 		contentPane.add(rdbtnCarte);
 		
-		rdbtnChque = new JRadioButton("Chaque");
-		buttonGroup.add(rdbtnChque);
-		rdbtnChque.setBounds(191, 34, 88, 23);
-		contentPane.add(rdbtnChque);
+		rdbtnCheque = new JRadioButton("Chaque");
+		buttonGroup.add(rdbtnCheque);
+		rdbtnCheque.setBounds(191, 34, 88, 23);
+		contentPane.add(rdbtnCheque);
 		
 		JLabel lblTotal = new JLabel("Total : ");
 		lblTotal.setBounds(6, 79, 61, 16);
@@ -104,7 +109,7 @@ public class EcranTraiterPaiement {
 		contentPane.add(textFieldTotal);
 		textFieldTotal.setColumns(10);
 		
-		JLabel lblMontantReu = new JLabel("Montant re�u :");
+		JLabel lblMontantReu = new JLabel("Montant recu :");
 		lblMontantReu.setBounds(6, 116, 134, 16);
 		contentPane.add(lblMontantReu);
 		
@@ -185,12 +190,14 @@ public class EcranTraiterPaiement {
 	private void updateMonnaie() {
 		double monnaie = 0;
 		double montantRecu = 0;
+		PaiementConteneur paiement = null;
 		
 		try {
 			montantRecu = Double.parseDouble(textFieldMontantRecu.getText());
 		}
 		catch(Exception e) {
 			e.printStackTrace();
+			montantRecu = 0;
 		}
 		
 		monnaie = montantRecu - vente.getGrandTotal();
@@ -199,6 +206,19 @@ public class EcranTraiterPaiement {
 			JOptionPane.showMessageDialog(frmTraiterUnPaiement, "Le montant recu est inferieur au total.");
 		}
 		else {
+			
+			// Patron de conception Strategie
+			if(rdbtnEspeces.isSelected()) {
+				paiement = new PaiementConteneur(new PaiementParEspeces(vente.getGrandTotal()));
+			}
+			else if(rdbtnCarte.isSelected()) {
+				paiement = new PaiementConteneur(new PaiementParCarte(vente.getGrandTotal()));
+			}
+			else if(rdbtnCheque.isSelected()) {
+				paiement = new PaiementConteneur(new PaiementParCheque(vente.getGrandTotal()));
+			}
+			paiement.effectuerPaiement();
+			
 			isPaiementReussi = true;
 			DecimalFormat decimalFormat = new DecimalFormat();
 			decimalFormat.setMaximumFractionDigits(2);
