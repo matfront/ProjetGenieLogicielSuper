@@ -43,6 +43,11 @@ public class EcranTraiterPaiement {
 	private JTextField textFieldMontantRecu;
 	private JTextField textFieldMonnaie;
 	
+	JRadioButton rdbtnEspces;
+	JRadioButton rdbtnCarte;
+	JRadioButton rdbtnChque;
+
+	
 	private boolean isPaiementReussi = false;
 	
 	private Vente vente;
@@ -72,18 +77,18 @@ public class EcranTraiterPaiement {
 		lblModeDePaiement.setBounds(6, 6, 178, 16);
 		contentPane.add(lblModeDePaiement);
 		
-		JRadioButton rdbtnEspces = new JRadioButton("Especes");
+		rdbtnEspces = new JRadioButton("Especes");
 		rdbtnEspces.setSelected(true);
 		buttonGroup.add(rdbtnEspces);
 		rdbtnEspces.setBounds(6, 34, 91, 23);
 		contentPane.add(rdbtnEspces);
 		
-		JRadioButton rdbtnCarte = new JRadioButton("Carte");
+		rdbtnCarte = new JRadioButton("Carte");
 		buttonGroup.add(rdbtnCarte);
 		rdbtnCarte.setBounds(101, 34, 83, 23);
 		contentPane.add(rdbtnCarte);
 		
-		JRadioButton rdbtnChque = new JRadioButton("Chaque");
+		rdbtnChque = new JRadioButton("Chaque");
 		buttonGroup.add(rdbtnChque);
 		rdbtnChque.setBounds(191, 34, 88, 23);
 		contentPane.add(rdbtnChque);
@@ -99,7 +104,7 @@ public class EcranTraiterPaiement {
 		contentPane.add(textFieldTotal);
 		textFieldTotal.setColumns(10);
 		
-		JLabel lblMontantReu = new JLabel("Montant reçu :");
+		JLabel lblMontantReu = new JLabel("Montant reï¿½u :");
 		lblMontantReu.setBounds(6, 116, 134, 16);
 		contentPane.add(lblMontantReu);
 		
