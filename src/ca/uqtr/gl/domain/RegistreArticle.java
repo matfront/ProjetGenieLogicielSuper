@@ -30,6 +30,10 @@ public class RegistreArticle {
 		return listeArticles;
 	}
 	
+	public void initListeArticles() {
+		listeArticles.clear();
+	}
+	
 	public static Article rechercherArticle(int identifiant) {
 		return listeArticles.get(identifiant);
 	}
@@ -44,7 +48,10 @@ public class RegistreArticle {
 		listeArticles.add(ArticleFactory.buildArticle(code, description, longeur, largeur, hauteur, prix, qte, fraisDouane, provenance));
 	}
 
-	public void supprimerArticle(Article article) {
+	public void supprimerArticle(Article article) throws Exception {
+		if(article == null)
+			throw new Exception("code inexistant");	
+		
 		listeArticles.remove(article);
 	}
 

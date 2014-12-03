@@ -6,6 +6,7 @@ import ca.uqtr.gl.domain.RegistreClient;
 import ca.uqtr.gl.entities.Article;
 import ca.uqtr.gl.entities.Article.TypeProvenance;
 
+
 public class ControlleurArticles {
 	
 	private static RegistreArticle registreArticle;
@@ -40,7 +41,7 @@ public class ControlleurArticles {
 		registreArticle.ajouterArticle(code, description, longeur, largeur, hauteur, prix, qte, fraisDouane, provenance);
 	}
 
-	public void supprimer(Article a) {
+	public void supprimer(Article a) throws Exception {
 		registreArticle.supprimerArticle(a);
 	}
 

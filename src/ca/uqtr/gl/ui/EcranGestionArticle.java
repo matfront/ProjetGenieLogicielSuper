@@ -261,9 +261,14 @@ public class EcranGestionArticle {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (article != null) {
-					ctlArticles.supprimer(article);
+					try {
+						ctlArticles.supprimer(article);
+
 					viderChamps();
 					article = null;
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
 				}
 			}
 		});
