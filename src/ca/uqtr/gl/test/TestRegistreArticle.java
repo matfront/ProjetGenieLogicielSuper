@@ -85,13 +85,21 @@ public class TestRegistreArticle {
 		
 		Article a = registreArticle.obtenirArticle("2");
 	   	registreArticle.modifierArticle(a, "34", "testModif", 2, 2, 2, 2, 2, 0, TypeProvenance.Can);
+	   	assertEquals("Modifcation", "testModif", a.getDescription());
 	}
 
 	@Test
 	public final void testObtenirArticle() {
 		
 		try {
-				registreArticle.obtenirArticle("2");
+				Article a = registreArticle.obtenirArticle("2");
+				assertEquals("Description est =", "TestCan", a.getDescription());
+				assertEquals("Vérifcation la création des classes selon la provenance", "ca.uqtr.gl.entities.ArticleCan", a.getClass().getName());
+				
+				a = registreArticle.obtenirArticle("3");
+				assertEquals("Vérifcation la création des classes selon la provenance", "ca.uqtr.gl.entities.ArticleUs", a.getClass().getName());
+				
+				
 		} catch (Exception e) {
 			fail();
 		}

@@ -45,6 +45,10 @@ public class RegistreClient {
 		listeClients.remove(client);
 	}
 
+	public void initListeClients() {
+		listeClients.clear();
+	}
+	
 	public void modifierClient(Client c, String nom, String prenom, 
 			Date dateNaissance, Adresse adresse, String noTel, String courriel) {
 		
