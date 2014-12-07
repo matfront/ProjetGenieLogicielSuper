@@ -23,6 +23,8 @@ public class TestRegistreArticle {
 	public void setUp()  {
 		
 		try {
+			
+			//Ajoute dans le registe des articles pour les tests. Cette fonction sera appelée à chaque test.  
 			registreArticle = RegistreArticle.getInstance();
 			registreArticle.initListeArticles();
 		
@@ -38,6 +40,7 @@ public class TestRegistreArticle {
 	@Test
 	public final void testGetInstance() {
 	      
+		  //test du sangleton. vérifie si l'instance est pareil.
 		  RegistreArticle instance1 = RegistreArticle.getInstance();
 		  RegistreArticle instance2 = RegistreArticle.getInstance();
       
@@ -48,12 +51,20 @@ public class TestRegistreArticle {
 	@Test
 	public final void testAjouterArticle() {
 		try {
-			   registreArticle.ajouterArticle("4", "TestCan4", 1, 1, 1, 1, 1, 0, TypeProvenance.Can);		
+			   //initilaliser le nombre d'article du départ.
+			   int nombreArticleAvant =  registreArticle.getListeArticles().size();
+			
+			   registreArticle.ajouterArticle("4", "TestCan4", 1, 1, 1, 1, 1, 0, TypeProvenance.Can);	
+			   
+			   //vérification du nombre de départ et nombre actuelle est augmenté.
+			   assertTrue("AjouterArticle() n'augmente pas le nombre d'article", registreArticle.getListeArticles().size() - 1 == nombreArticleAvant);
+			   
 		} catch (Exception e) {
 			fail();
 		}
 		
 		try {
+			//vérification l'ajout d'un article existant
 			registreArticle.ajouterArticle("4", "TestCan4", 1, 1, 1, 1, 1, 0, TypeProvenance.Can);	
 		    fail( "Erreur ajouterArticle permet d'ajouter un code existant" );
 		} catch (Exception e) {
@@ -65,14 +76,21 @@ public class TestRegistreArticle {
 	@Test
 	public final void testSupprimerArticle() {
 		try {
-				Article a = registreArticle.obtenirArticle("2");
-			   	registreArticle.supprimerArticle(a);
+			   //initilaliser le nombre d'article du départ.
+			   int nombreArticleAvant =  registreArticle.getListeArticles().size();
+				   			   
+			   Article a = registreArticle.obtenirArticle("2");
+			   //vérification du nombre de départ et nombre actuelle est diminué.
+			   registreArticle.supprimerArticle(a);
+			   assertTrue("SupprimerArticle() ne diminue pas le nombre d'article", registreArticle.getListeArticles().size() + 1 == nombreArticleAvant);
+				
 		
 		} catch (Exception e) {
 			fail();
 		}
 		
 		try {
+			//vérification l'ajout d'un null.
 		   	registreArticle.supprimerArticle(null);
 		    fail( "Erreur supprimerArticle permet de supprimer un null" );
 		} catch (Exception e) {
@@ -85,7 +103,10 @@ public class TestRegistreArticle {
 		
 		Article a = registreArticle.obtenirArticle("2");
 	   	registreArticle.modifierArticle(a, "34", "testModif", 2, 2, 2, 2, 2, 0, TypeProvenance.Can);
-	   	assertEquals("Modifcation", "testModif", a.getDescription());
+	   	
+	   	//Vérification de la modification des propriétés description et code fonctionne
+	   	assertEquals("Erreur avec ModifierArticle() Modifcation de la description", "testModif", a.getDescription());
+	   	assertEquals("Erreur avec ModifierArticle() Modifcation du code", "34", a.getCode());
 	}
 
 	@Test
@@ -93,11 +114,13 @@ public class TestRegistreArticle {
 		
 		try {
 				Article a = registreArticle.obtenirArticle("2");
+				//Vérification de l'obtation de l'article
 				assertEquals("Description est =", "TestCan", a.getDescription());
 				assertEquals("Vérifcation la création des classes selon la provenance", "ca.uqtr.gl.entities.ArticleCan", a.getClass().getName());
 				
-				a = registreArticle.obtenirArticle("3");
-				assertEquals("Vérifcation la création des classes selon la provenance", "ca.uqtr.gl.entities.ArticleUs", a.getClass().getName());
+				//Vérification Si le factory a instancié la bonne classe
+				a = registreArticle.obtenirArticle("3");			
+				assertEquals("Vérifcation d'obetenir un Article", "ca.uqtr.gl.entities.ArticleUs", a.getClass().getName());
 				
 				
 		} catch (Exception e) {
