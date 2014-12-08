@@ -41,4 +41,9 @@ public class Adresse implements java.io.Serializable {
 	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
 	}
+	
+	@Override
+	public String toString() {
+		return this.getNoCivique() + " " + this.getOdonyme() + ", " + this.getVille() + ", " + this.getCodePostal();
+	}
 }
