@@ -16,6 +16,10 @@ public class Article implements java.io.Serializable {
 	public static enum TypeProvenance {
 	    Can, Us 
 	} 
+	
+	public Article() {
+	}
+	
 	public Article(String code, String description, double longeur, double largeur, double hauteur, double prix, double qte, TypeProvenance provenance) {
 	
 		this.code = code;

@@ -1,11 +1,11 @@
 package ca.uqtr.gl.aspects;
 
-import java.lang.Object;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import ca.uqtr.gl.entities.Adresse;
+import ca.uqtr.gl.entities.Article;
 import ca.uqtr.gl.entities.Client;
 
 public aspect LoggingAspect {
@@ -14,6 +14,21 @@ private Logger logger = Logger.getLogger("trace");
 	
 	pointcut ajouterClientMethod(): 
 	call(void ajouterClient(..));
+	
+	pointcut modifierClientMethod(): 
+	call(void modifierClient(..));
+	
+	pointcut supprimerClientMethod(): 
+	call(void supprimerClient(..));
+	
+	pointcut ajouterArticleMethod(): 
+	call(void ajouterArticle(..));
+	
+	pointcut modifierArticleMethod(): 
+	call(void modifierArticle(..));
+	
+	pointcut supprimerArticleMethod(): 
+	call(void supprimerArticle(..));
 	
 	after() returning() : ajouterClientMethod() {
 		Object[] paramValues = thisJoinPoint.getArgs();
@@ -34,9 +49,6 @@ private Logger logger = Logger.getLogger("trace");
 		+ getLogClient(client)
 		);	
 	} 
-	
-	pointcut modifierClientMethod(): 
-	call(void modifierClient(..));
 	
 	before() : modifierClientMethod() {
 		Object[] paramValues = thisJoinPoint.getArgs();
@@ -62,9 +74,6 @@ private Logger logger = Logger.getLogger("trace");
 		);	
 	} 
 	
-	pointcut supprimerClientMethod(): 
-	call(void supprimerClient(..));
-	
 	before() : supprimerClientMethod() {
 		Object[] paramValues = thisJoinPoint.getArgs();
 		
@@ -85,6 +94,74 @@ private Logger logger = Logger.getLogger("trace");
 						+ adresseTexte
 						+ "Telephone: " + c.getNoTelephone() + "\n"
 						+ "Courriel: " + c.getCourriel() + "\n";
+		
+		return log;
+	}
+	
+	after() returning() : ajouterArticleMethod() {
+		Object[] paramValues = thisJoinPoint.getArgs();
+		
+		Article a = new Article();
+		
+		a.setCode((String) paramValues[0]);
+		a.setDescription((String) paramValues[1]);
+		a.setLongeur((Double) paramValues[2]);
+		a.setLargeur((Double) paramValues[3]);
+		a.setHauteur((Double) paramValues[4]);
+		a.setPrix((Double) paramValues[5]);
+		a.setQteInventaire((Double) paramValues[6]);
+		a.setFraisDouane((Double) paramValues[7]);
+		
+		logger.logp(Level.INFO, null, null, "\n "
+				+ "================ Log Transaction Ajouter Article =============== \n"
+				+ getLogArticle(a)
+				);	
+	}
+	
+	before() : modifierArticleMethod() {
+		Object[] paramValues = thisJoinPoint.getArgs();
+		
+		Article article = (Article) paramValues[0];
+		
+		Article a = new Article();
+		a.setCode((String) paramValues[1]);
+		a.setDescription((String) paramValues[2]);
+		a.setLongeur((Double) paramValues[3]);
+		a.setLargeur((Double) paramValues[4]);
+		a.setHauteur((Double) paramValues[5]);
+		a.setPrix((Double) paramValues[6]);
+		a.setQteInventaire((Double) paramValues[7]);
+		a.setFraisDouane((Double) paramValues[8]);
+		
+		logger.logp(Level.INFO, null, null, "\n "
+				+ "================ Log Transaction Modifier Article =============== \n"
+				+ "================ Avant modification =============== \n"
+				+ getLogArticle(article)
+				+ "================ Apres modification =============== \n"
+				+ getLogArticle(a)
+				);	
+	}
+	
+	before() : supprimerArticleMethod() {
+		Object[] paramValues = thisJoinPoint.getArgs();
+		
+		Article a = (Article) paramValues[0];
+		
+		logger.logp(Level.INFO, null, null, "\n "
+				+ "================ Log Transaction Supprimer Article =============== \n"
+				+ getLogArticle(a)
+				);	
+	}
+	
+	private String getLogArticle(Article a) {
+		String log = 	"Code: " + a.getCode() + "\n"
+						+ "Description: " + a.getDescription() + "\n"
+						+ "Longeur: " + String.valueOf(a.getLongeur()) + "\n"
+						+ "Largeur: " + String.valueOf(a.getLargeur()) + "\n"
+						+ "Hauteur: " + String.valueOf(a.getHauteur()) + "\n"
+						+ "Prix: " + String.valueOf(a.getPrix()) + "\n"
+						+ "Quantité inventaire: " + a.getQteInventaire() + "\n"
+						+ "Frais douane: " + String.valueOf(a.getFraisDouane()) + "\n";
 		
 		return log;
 	}
