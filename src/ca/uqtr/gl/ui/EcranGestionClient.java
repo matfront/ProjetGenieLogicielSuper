@@ -56,14 +56,20 @@ public class EcranGestionClient {
 		if (c != null) {
 			txtNom.setText(c.getNom());
 			txtPrenom.setText(c.getPrenom());
-			txtNoCivique.setText(String.valueOf(c.getAdresse().getNoCivique()));
-			txtVille.setText(c.getAdresse().getVille());
-			txtCodePostal.setText(c.getAdresse().getCodePostal());
 			txtCourriel.setText(c.getCourriel());
-			txtOdonyme.setText(c.getAdresse().getOdonyme());
-			String dateNaissance = new SimpleDateFormat("dd-mm-yyyy hh:MM:ss").format(c.getDateNaissance());
-			txtDateNaissance.setText(dateNaissance);
 			txtTelephone.setText(c.getNoTelephone());
+			
+			if (c.getAdresse() != null) {
+				txtVille.setText(c.getAdresse().getVille());
+				txtCodePostal.setText(c.getAdresse().getCodePostal());
+				txtOdonyme.setText(c.getAdresse().getOdonyme());
+				txtNoCivique.setText(String.valueOf(c.getAdresse().getNoCivique()));
+			}
+			
+			if (c.getDateNaissance() != null) {
+				String dateNaissance = new SimpleDateFormat("dd-mm-yyyy hh:MM:ss").format(c.getDateNaissance());
+				txtDateNaissance.setText(dateNaissance);
+			}
 		}
 	}
 
