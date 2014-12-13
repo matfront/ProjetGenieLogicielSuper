@@ -10,7 +10,7 @@ import ca.uqtr.gl.entities.Client;
 
 public aspect LoggingAspect {
 
-private Logger logger = Logger.getLogger("trace");
+	private Logger logger = Logger.getLogger("trace");
 	
 	pointcut ajouterClientMethod(): 
 	call(void ajouterClient(..));
@@ -160,7 +160,7 @@ private Logger logger = Logger.getLogger("trace");
 						+ "Largeur: " + String.valueOf(a.getLargeur()) + "\n"
 						+ "Hauteur: " + String.valueOf(a.getHauteur()) + "\n"
 						+ "Prix: " + String.valueOf(a.getPrix()) + "\n"
-						+ "Quantité inventaire: " + a.getQteInventaire() + "\n"
+						+ "Quantitï¿½ inventaire: " + a.getQteInventaire() + "\n"
 						+ "Frais douane: " + String.valueOf(a.getFraisDouane()) + "\n";
 		
 		return log;

@@ -14,7 +14,6 @@ public class Main {
 					
 					EcranPrincipal window = new EcranPrincipal();
 					window.getFrame().setVisible(true);
-					ArchiveTimer timer = new ArchiveTimer();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

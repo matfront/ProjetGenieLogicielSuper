@@ -36,23 +36,6 @@ public class ArchiveTimer {
 		minuteTask = new TimerTask() {
 			@Override
 			public void run() {
-				/*Article a = new Article("ABC123", "Frisbee", 12, 12, 1, 20, 20);
-				
-				Adresse ad = new Adresse(282, "rue Boulard", "Trois-Rivières", "G8T9G9");
-				
-				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-				Date date = null;
-				try {
-					date = sdf.parse("28/03/1992");
-				} catch (Exception e) { }
-				
-				Client c = new Client("Lamer", "Gabriel", date, ad);
-				
-				Vente v = new Vente();
-				v.ajouterLigne(2, a);
-				v.setNumeroFacture(1);
-				v.setClient(c);*/
-				
 				DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 				Date d = new Date();
 				
