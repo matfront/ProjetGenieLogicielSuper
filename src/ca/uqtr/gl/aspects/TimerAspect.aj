@@ -7,7 +7,7 @@ public aspect TimerAspect {
 	pointcut startEcranPrincipal(): 
 		call(EcranPrincipal.new());
 	
-	before() : startEcranPrincipal() {
+	after() : startEcranPrincipal() {
 		new ArchiveTimer();
 	}
 }
